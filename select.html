@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<title></title>
+	</head>
+	<body>
+		<script src="jquery.js"></script>
+		
+		<div>
+			<input class="" type="text" style="width: 40px;" placeholder="一级">  
+			<select id="first" style="height: 30px;width: 100px;background-color: gray;">
+			
+			</select>
+			<input class="" type="text" style="width: 40px;" placeholder="二级">  
+			<select id="second" style="height: 30px;width: 150px;background-color: gray;"> 
+			
+			</select>
+			
+		</div>
+		<div style="margin-top: 30px;">
+			<input  type="text" style="width: 40px;height: 30px;" placeholder="结果:" />
+			<span id="result" style="width: 140px;height: 30px;"></span>
+			
+		</div>
+			
+		<script>
+		window.onload = function(){
+			console.log(navigator.userAgent.toLowerCase());
+			var BrowserInfo = {
+			    userAgent: navigator.userAgent.toLowerCase(),
+			    isAndroid: Boolean(navigator.userAgent.match(/android/ig)),
+			    isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/ig)),
+			    isIpad: Boolean(navigator.userAgent.match(/ipad/ig)),
+			    isWeixin: Boolean(navigator.userAgent.match(/MicroMessenger/ig))
+			}
+			console.log(BrowserInfo);
+	      var List = {
+                  "firstList": [
+                      {"key":"01","name":"农业"},
+                      {"key":"02","name":"工业"},
+                      {"key":"03","name":"商业"},
+                      {"key":"04","name":"金融"},
+                      {"key":"05","name":"房地产"},
+                      {"key":"06","name":"服务业"},
+                      {"key":"07","name":"自由职业"},
+                      {"key":"08","name":"学生"},
+                      {"key":"09","name":"其他"}
+          
+                  ],
+          
+                  "secondList": [
+                      {"key":"0101","name":"农、林、牧、渔业","parentNo":"01"},
+          
+                      {"key":"0201","name":"采矿业","parentNo":"02"},
+                      {"key":"0202","name":"制造业","parentNo":"02"},
+                      {"key":"0203","name":"能源","parentNo":"02"},
+                      {"key":"0204","name":"建筑","parentNo":"02"},
+          
+                      {"key":"0301","name":"批发零售","parentNo":"03"},
+                      {"key":"0302","name":"租赁商务","parentNo":"03"},
+                      {"key":"0303","name":"汽车销售","parentNo":"03"},
+          
+                      {"key":"0401","name":"银行","parentNo":"04"},
+                      {"key":"0402","name":"证券","parentNo":"04"},
+                      {"key":"0403","name":"平安寿险","parentNo":"04"},
+                      {"key":"0404","name":"平安产险","parentNo":"04"},
+                      {"key":"0405","name":"其他保险公司","parentNo":"04"},
+                      {"key":"0406","name":"期货","parentNo":"04"},
+                      {"key":"0407","name":"小贷公司","parentNo":"04"},
+                      {"key":"0408","name":"资本投资","parentNo":"04"},
+          
+                      {"key":"0501","name":"房地产开发","parentNo":"05"},
+                      {"key":"0502","name":"物业管理","parentNo":"05"},
+                      {"key":"0503","name":"地产经营","parentNo":"05"},
+          
+                      {"key":"0601","name":"交通运输、物流","parentNo":"06"},
+                      {"key":"0602","name":"信息服务","parentNo":"06"},
+                      {"key":"0603","name":"文化产业","parentNo":"06"},
+                      {"key":"0604","name":"房产中介","parentNo":"06"},
+                      {"key":"0605","name":"贷款中介","parentNo":"06"},
+                      {"key":"0606","name":"生活服务","parentNo":"06"},
+          
+                      {"key":"0701","name":"自由职业","parentNo":"07"},
+                      {"key":"0702","name":"退休","parentNo":"07"},
+          
+                      {"key":"0801","name":"学生","parentNo":"08"},
+          
+                      {"key":"0901","name":"科教文卫","parentNo":"09"},
+                      {"key":"0902","name":"公共事业","parentNo":"09"},
+                      {"key":"0903","name":"社会组织","parentNo":"09"},
+                      {"key":"0904","name":"政府机关","parentNo":"09"}
+                  ]
+             };
+             
+             var first = List.firstList || [];
+             var second = List.secondList || [];
+            
+             var firstSelect = document.getElementById('first');
+             var secondSelect = document.getElementById('second');
+             for(var i= 0;i<first.length; i++){
+             	var s = document.createElement("option");
+             	s.setAttribute("value",first[i].key);
+             	s.innerText = first[i].name;
+             	firstSelect.appendChild(s);
+             }
+          var connection = function(item){
+             	var tempArr = [];
+				for(var j= 0;j<second.length; j++){
+					if(second[j].parentNo == first[item].key){
+						tempArr.push(second[j]);
+					}
+				}
+				
+			   for(var k= 0;k<tempArr.length; k++){
+			    		var s = document.createElement("option");
+	             	s.setAttribute("value",tempArr[k].key);
+	             	s.innerText = tempArr[k].name;
+	                secondSelect.appendChild(s);
+			    }
+           };
+           var localTemp1 = localStorage.getItem("firstIndex");
+           var localTemp2 = localStorage.getItem("secondIndex");
+		   if(localTemp1){
+		   		firstSelect.selectedIndex = localTemp1;
+		   		connection(localTemp1);
+		   } else {
+		   		connection(0);
+		   }
+		   if(localTemp2){
+		   		secondSelect.selectedIndex = localTemp2;
+		   }
+		   
+//		   localStorage.getItem("firstIndex") ? connection(localStorage.getItem("firstIndex")) : 	connection(0);
+		   
+           firstSelect.onchange = function(){
+           	console.log(firstSelect.selectedIndex);
+           	secondSelect.innerHTML="";
+           	var index = parseInt(firstSelect.selectedIndex);
+           	connection(index);
+           	 localStorage.setItem("firstIndex",null);
+           	 localStorage.setItem("firstIndex",firstSelect.selectedIndex);
+           };
+           secondSelect.onchange = function(){
+           	console.log(secondSelect.selectedIndex);
+           	var result = document.getElementById("result");
+           	var resultText = first[firstSelect.selectedIndex].name + "--" + second[secondSelect.selectedIndex].name;
+           	result.innerHTML = resultText;
+           	localStorage.setItem("secondIndex",null);
+            localStorage.setItem("secondIndex",secondSelect.selectedIndex);
+           };
+                  
+		}
+		</script>
+		
+	</body>
+</html>
+
+
