@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-11-27 09:43:07
+ * @Last Modified time: 2018-11-27 09:49:28
  */
 
 export default class Utils {
@@ -161,5 +161,29 @@ export default class Utils {
     */
     is_empty(obj){
         return JSON.stringify(obj) == '{}';
+    }
+
+    /**
+     * Example:
+     * var result = merge({foo: 123}, {foo: 456});
+     * console.log(result.foo); // outputs 456
+     * 
+     * @param {Object} obj1 Object to merge
+     * @returns {Object} Result of all merge properties
+    */
+    merge(/* obj1, obj2, obj3, ... */) {
+        var result = {};
+        function assignValue(val, key) {
+            if (typeof result[key] === 'object' && typeof val === 'object') {
+                result[key] = merge(result[key], val);
+            } else {
+                result[key] = val;
+            }
+        }
+    
+        for (var i = 0, l = arguments.length; i < l; i++) {
+            forEach(arguments[i], assignValue);
+        }
+        return result;
     }
 }
