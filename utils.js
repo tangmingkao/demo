@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-11-26 15:53:14
+ * @Last Modified time: 2018-11-27 09:43:07
  */
 
 export default class Utils {
@@ -128,5 +128,38 @@ export default class Utils {
         };
 
         return debounced;
+    }
+    /*
+    * 简单的克隆函数
+    * @param origin {object}  克隆的对象
+    * 
+    */
+    clone(origin){
+        let originProto = Object.getPrototypeOf(origin);
+        return Object.assign(Object.create(originProto),origin);
+    }
+    /*
+    * 校验是否输入emoji表情
+    * @param str {string}  校验的字符串
+    * 校验是否输入表情的简单方法。true为输入了.
+    */
+    checkEmoji(str){
+        let regemoji = /\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f]|\ud83d[\ude80-\udeff]/g;
+        return str.match(regemoji) != null;
+    }
+    /*
+    * 仿jq的trim方法
+    * @param text {string}  处理的字符串
+    */
+    jq_trim(text){
+        let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+        return text == null ? "" : (text + '').replace(rtrim,"");
+    }
+    /*
+    * 简单的判断是否是空对象
+    * @param obj {object}  处理的字符串
+    */
+    is_empty(obj){
+        return JSON.stringify(obj) == '{}';
     }
 }
