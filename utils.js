@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-11-27 09:49:28
+ * @Last Modified time: 2018-11-30 18:36:38
  */
 
 export default class Utils {
@@ -186,4 +186,39 @@ export default class Utils {
         }
         return result;
     }
+    /*
+    * @param time {string}  倒计时时长
+    *
+    * 例子：
+    * time = '5'     
+    * 倒计时5分钟
+    */
+    getCount(time) {
+        //默认输入分钟
+        let that = this;
+        if (typeof time == "string") {
+            time = Number(time);
+        }
+        let secondTime = time * 60; //变为秒
+        if (secondTime) {
+            that.timerFlag = setInterval(() => {
+                if (secondTime >= 0 && secondTime <= that.count_time * 60) {
+                    let minute = parseInt(secondTime / 60);
+                    let second = parseInt(secondTime % 60);
+                    if (minute >= 0 && minute < 10) {
+                        minute = '0' + minute;
+                    }
+                    if (second >= 0 && second < 10) {
+                        second = '0' + second;
+                    }
+                    // 需要展示的数据
+                    // that.count_num = minute + ":" + second;
+                    secondTime--;
+                } else {
+                    clearInterval(that.timerFlag);
+                }
+            }, 1000);
+        }
+    }
+    
 }
