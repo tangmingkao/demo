@@ -2,12 +2,12 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-11-30 18:36:38
+ * @Last Modified time: 2018-11-30 18:43:32
  */
 
 export default class Utils {
     constructor(){};
-
+    // _noop = function(){};
     /*
     * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次,详情参考underscore.js的_.throttle函数。
     * @param func {function}  需要调用的函数

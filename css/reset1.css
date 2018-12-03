@@ -1,0 +1,20 @@
+@charset "utf-8";
+* {margin:0;padding:0;}
+html,body {width:100%;height:100%;}
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,xmp,form,fieldset,legend,input,button,textarea,hr {margin:0;padding:0;}
+body {font-family:Arial,"Heiti SC","Microsoft YaHei";font-size:0.28rem;color:#333;line-height:1.6;background-color:#211e38;}
+h1,h2,h3,h4,h5,h6 {line-height:1.4;}
+a {color:#333;text-decoration:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+a:hover {color:#333;text-decoration:none;}
+ul,ol,li {list-style:none;}
+img {border:none;}
+sup,sub {font-size:0.5em;}
+select,input,button {vertical-align:middle;font-size:100%;outline:0;resize:none;}
+button,html input[type="button"],input[type="reset"],input[type="submit"],input[type="file"] {-webkit-appearance:none;outline:none;cursor:pointer;}
+input::-webkit-input-placeholder {color:#b2b2b2;}
+input:-moz-placeholder {color:#b2b2b2;}
+input::-moz-placeholder {color:#b2b2b2;}
+input:-ms-input-placeholder {color:#b2b2b2;}
+.clear {clear:both;display:block;height:0;visibility:hidden;font:0/0 arial;}
+.clearfix:after {content:" ";display:block;visibility:hidden;clear:both;height:0;font-size:0;}
+.clearfix {*zoom:1;}
