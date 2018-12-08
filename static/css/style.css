@@ -9,7 +9,7 @@
     background-position: 50% 50%;
     background-repeat: no-repeat;
     padding-top: 1px;
-    /* position: relative; */
+    position: relative;
 }
 .particles-js-canvas-el{
     position: absolute;

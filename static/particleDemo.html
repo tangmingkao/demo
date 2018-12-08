@@ -5,14 +5,35 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" href="./css/public.scc" />
+        <link rel="stylesheet" href="./css/public.css" />
 	</head>
 	<body>
-        <div class="contanier">
+        <div class="container">
             <div id="particles-js"></div>
-        </div>     
+        </div> 
+       
     </body>
     <!-- particles shape -->
     <script src="./js/particles.js"></script>
     <script src="./js/initParticles.js"></script>
+    <style>
+        html{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        .container{
+            position: absolute;
+            height: 600px;
+            width: 1200px;
+            top: 50%;
+            left: 50%;
+            margin-top: -300px;
+            margin-left: -600px;
+        }
+    </style>
 </html>
