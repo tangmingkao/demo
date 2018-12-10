@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-11-30 18:43:32
+ * @Last Modified time: 2018-12-10 13:51:48
  */
 
 export default class Utils {
@@ -219,6 +219,28 @@ export default class Utils {
                 }
             }, 1000);
         }
+    }
+
+    /*
+    * 已知圆心位置和半径，获取圆上各个点的位置坐标
+    * @param int {angle}  相隔角度
+    * 弧度计算公式： 2*PI/360*角度 例如： 30度的弧度位： 2*Math.PI/360*30
+    * @returns tempArray {Array} 返回的各个位置的数组
+    */
+    getCirclePosition(angle){
+        //假设圆心坐标位(50,50),半径为25.
+        let tempArray = [];
+        let a=50,b=50,r=25;
+        let times = Math.floor(360/angle);
+        for(let i=0;i<times;i++){
+            let radian = (2*Math.PI/360)*angle*i;
+            var X = a + Math.sin(radian) * r;
+            var Y = b - Math.cos(radian) * r ;
+            let obj = {'positionX': X,"positionY": Y};
+            tempArray.push(obj);
+        }  
+        return tempArray;             
+       
     }
     
 }
