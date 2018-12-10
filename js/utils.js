@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-12-10 13:51:48
+ * @Last Modified time: 2018-12-10 20:35:24
  */
 
 export default class Utils {
@@ -239,8 +239,47 @@ export default class Utils {
             let obj = {'positionX': X,"positionY": Y};
             tempArray.push(obj);
         }  
-        return tempArray;             
-       
+        return tempArray;              
     }
-    
+
+    /*
+    * 回到顶部
+    * @param int {duration}  运动毫秒数
+    * @默认2000毫秒
+    */
+    backToTop(duration) {
+        //增加动画的处理
+        let scrollDuration = duration || 2000;
+        let scrollStep = window.scrollY / (scrollDuration/15); 
+        var scrollInterval = setInterval(() => {
+            if(window.scrollY != 0){
+                window.scrollBy(0,-scrollStep);
+            } else {
+                clearInterval(scrollInterval); 
+            }
+        },15);
+    }
+    /*
+    * 回到顶部 ease in and out，增加曲线运动
+    * @param int {duration}  运动毫秒数
+    * @默认2000毫秒
+    */
+    easeBackToTop(duration) {
+        //增加动画的处理
+        let scrollDuration = duration || 2000;
+        const scrollHeight = window.scrollY,
+        scrollStep = Math.PI / ( scrollDuration / 15 ),
+        cosParameter = scrollHeight / 2;
+        let scrollCount = 0,
+        scrollMargin,
+        scrollInterval = setInterval( () => {
+            if ( window.scrollY != 0 ) {
+                scrollCount = scrollCount + 1;  
+                scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
+                window.scrollTo( 0, ( scrollHeight - scrollMargin ) );
+            } else {
+                clearInterval(scrollInterval); 
+            } 
+        },15);
+    }
 }
