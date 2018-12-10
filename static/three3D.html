@@ -51,9 +51,7 @@
 		<script src="./js/three3D/tween.min.js"></script>
 		<script src="./js/three3D/TrackballControls.js"></script>
         <script src="./js/three3D/CSS3DRenderer.js"></script>
-        <script src="./js/initParticles.js"></script>    
-        
-        
+         
         <div id="container"></div>           
 		<div id="menu">
 			<button id="table">TABLE</button>
@@ -180,8 +178,6 @@
 					object.lookAt( vector );
 					targets.sphere.push( object );
                 }
-                
-              
 
 				// helix
 				var vector = new THREE.Vector3();
@@ -277,6 +273,32 @@
 
 				renderer.render( scene, camera );
 			}
+             //循环每过10秒切换形状
+            function changeShape() {
+                tempNum +=1;
+                let i = tempNum % 4 ;
+                switch(i){
+                    case 0: 
+                        transform( targets.sphere, 3000 );
+                        break;
+                    case 1: 
+                        transform( targets.table, 3000 );
+                        break;
+                    case 2: 
+                        transform( targets.helix, 3000 );
+                        break;
+                    case 3: 
+                        transform( targets.grid, 3000 );
+                        break;
+                    default: 
+                        transform( targets.sphere, 3000 );
+                        break;
+                }
+            }
+
+            setInterval(() => {
+                changeShape();
+            },15000);
 		</script>
 	</body>
 </html>
