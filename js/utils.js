@@ -2,7 +2,7 @@
  * @Author: tonyTang 
  * @Date: 2018-11-26 09:57:54 
  * @Last Modified by: tonyTang
- * @Last Modified time: 2018-12-10 20:35:24
+ * @Last Modified time: 2019-05-09 11:07:18
  */
 
 export default class Utils {
@@ -281,5 +281,24 @@ export default class Utils {
                 clearInterval(scrollInterval); 
             } 
         },15);
+    }
+    
+    /*
+    * 解析url的参数方法
+    * 
+    */
+    GetRequest() {
+        let url = window.location.href; //获取url中"?"符后的字串
+        let theRequest = new Object();
+        let requestIndex = url.indexOf('?');
+        if (url.indexOf("?") != -1) {
+            let str = url.substr(requestIndex+1);
+            let strs = str.split("&");
+            // console.log(strs);
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
     }
 }
