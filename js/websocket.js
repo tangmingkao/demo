@@ -32,7 +32,6 @@ class selfWebSocket {
         this.afterOpenEmit = [];
         //生成websocket对象
         const BrowserWebSocket = window.WebSocket || window.MozWebSocket;
-        // const socket = new BrowserWebSocket('wss://test.hoo.com/ws');
         const socket = new BrowserWebSocket(this.url);
         //socket属性
         socket.binaryType = 'arraybuffer';
